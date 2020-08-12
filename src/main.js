@@ -4,6 +4,9 @@ import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
 
+import "bootstrap";
+import "./assets/style.scss";
+
 createApp(App)
   .use(store)
   .use(router)
