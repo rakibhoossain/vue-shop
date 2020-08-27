@@ -1639,6 +1639,9 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   padding: 10px 0;
   box-shadow: 0px 0px 5.76px 0.24px rgba(0, 0, 0, 0.1);
 }
+.categories_menu_toggle.show{
+  display: block;
+}
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .categories_menu_toggle {
     display: none;
@@ -8569,7 +8572,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .chose_content h3 {
     font-size: 16px;
-    argin-bottom: 13px;
+    margin-bottom: 13px;
   }
 }
 @media only screen and (max-width: 767px) {
