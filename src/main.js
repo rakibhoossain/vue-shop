@@ -6,6 +6,7 @@ import store from "./store";
 
 import "bootstrap";
 import "./assets/style.scss";
+import "./assets/css/style.css";
 
 createApp(App)
   .use(store)
