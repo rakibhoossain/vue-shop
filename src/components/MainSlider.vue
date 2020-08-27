@@ -3,6 +3,7 @@
     <div class="slider_area owl-carousel">
       <div
         class="single_slider d-flex align-items-center"
+        v-carousel
         v-for="item in items"
         :key="item.id"
         :style="'background-image: url(' + item.image + ')'"
@@ -128,6 +129,16 @@ export default {
         items: 1,
         dots: true
       });
+    }
+  },
+  directives: {
+    carousel: {
+      // directive definition
+      bind: function(el) {
+        alert(el);
+        el.focus();
+        console.log("test........");
+      }
     }
   }
 };
