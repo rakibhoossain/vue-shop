@@ -23,6 +23,8 @@ let owl_carousel = require("owl.carousel");
 import "owl.carousel/dist/assets/owl.carousel.min.css";
 window.fn = owl_carousel;
 
+require("./assets/js/jquery.scrollUp.min.js");
+
 require("jquery-nice-select");
 import "jquery-nice-select/css/nice-select.css";
 

@@ -420,6 +420,13 @@ export default {
         $(".sticky-header").addClass("sticky");
       }
     });
+    /*---  ScrollUp Active ---*/
+    $.scrollUp({
+      scrollText: '<i class="fa fa-angle-double-up"></i>',
+      easingType: "linear",
+      scrollSpeed: 900,
+      animation: "fade"
+    });
   }
 };
 </script>
