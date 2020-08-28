@@ -58,7 +58,10 @@
                 id="plant1"
                 role="tabpanel"
               >
-                <div class="product_carousel product_column5 owl-carousel">
+                <div
+                  class="product_carousel product_column5 owl-carousel"
+                  id="trending-products"
+                >
                   <div class="product_items">
                     <article class="single_product">
                       <figure>
@@ -2170,7 +2173,7 @@ export default {
   },
   mounted() {
     console.log(this.$el.textContent); // I'm text inside the component.
-    var $porductColumn5 = $(".product_column5");
+    var $porductColumn5 = $("#trending-products");
     if ($porductColumn5.length > 0) {
       $porductColumn5
         .on("changed.owl.carousel initialized.owl.carousel", function(event) {

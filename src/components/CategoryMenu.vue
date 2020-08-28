@@ -1,15 +1,9 @@
 <template>
   <div class="categories_menu">
-    <div
-      class="categories_title"
-      @click="isShowCategoryMenu = !isShowCategoryMenu"
-      :class="{ active: isShowCategoryMenu }"
-    >
-      <h2 class="categori_toggle">
-        All Cattegories
-      </h2>
+    <div class="categories_title">
+      <h2 class="categori_toggle">All Cattegories</h2>
     </div>
-    <div class="categories_menu_toggle" :class="{ show: isShowCategoryMenu }">
+    <div class="categories_menu_toggle">
       <ul>
         <li class="menu_item_children">
           <a href="#">Vegetables<i class="fa fa-angle-right"></i></a>
@@ -138,9 +132,7 @@
         <li><a href="#"> Jam & Honey</a></li>
         <li><a href="#"> Frozen Food</a></li>
         <li class="hidden"><a href="shop.html">New Sofas</a></li>
-        <li class="hidden">
-          <a href="shop.html">Sleight Sofas</a>
-        </li>
+        <li class="hidden"><a href="shop.html">Sleight Sofas</a></li>
         <li>
           <a href="#" id="more-btn"
             ><i class="fa fa-plus" aria-hidden="true"></i> More Categories</a
@@ -152,12 +144,89 @@
 </template>
 
 <script>
+import $ from "jquery";
 export default {
   name: "CategoryMenu",
-  data() {
-    return {
-      isShowCategoryMenu: false
-    };
+  mounted() {
+    /*---categories slideToggle---*/
+    $(".categories_title").on("click", function() {
+      $(this).toggleClass("active");
+      $(".categories_menu_toggle").slideToggle("medium");
+    });
+
+    /*---widget sub categories---*/
+    $(".sub_categories1 > a").on("click", function() {
+      $(this).toggleClass("active");
+      $(".dropdown_categories1").slideToggle("medium");
+    });
+
+    /*---widget sub categories---*/
+    $(".sub_categories2 > a").on("click", function() {
+      $(this).toggleClass("active");
+      $(".dropdown_categories2").slideToggle("medium");
+    });
+
+    /*---widget sub categories---*/
+    $(".sub_categories3 > a").on("click", function() {
+      $(this).toggleClass("active");
+      $(".dropdown_categories3").slideToggle("medium");
+    });
+
+    /*----------  Category more toggle  ----------*/
+
+    $(".categories_menu_toggle li.hidden").hide();
+    $("#more-btn").on("click", function(e) {
+      e.preventDefault();
+      $(".categories_menu_toggle li.hidden").toggle(500);
+      var htmlAfter =
+        '<i class="fa fa-minus" aria-hidden="true"></i> Less Categories';
+      var htmlBefore =
+        '<i class="fa fa-plus" aria-hidden="true"></i> More Categories';
+
+      if ($(this).html() == htmlBefore) {
+        $(this).html(htmlAfter);
+      } else {
+        $(this).html(htmlBefore);
+      }
+    });
+
+    /*---Category menu---*/
+    function categorySubMenuToggle() {
+      $(".categories_menu_toggle li.menu_item_children > a").on(
+        "click",
+        function() {
+          if ($(window).width() < 991) {
+            $(this).removeAttr("href");
+            var element = $(this).parent("li");
+            if (element.hasClass("open")) {
+              element.removeClass("open");
+              element.find("li").removeClass("open");
+              element.find("ul").slideUp();
+            } else {
+              element.addClass("open");
+              element.children("ul").slideDown();
+              element
+                .siblings("li")
+                .children("ul")
+                .slideUp();
+              element.siblings("li").removeClass("open");
+              element
+                .siblings("li")
+                .find("li")
+                .removeClass("open");
+              element
+                .siblings("li")
+                .find("ul")
+                .slideUp();
+            }
+          }
+        }
+      );
+      $(".categories_menu_toggle li.menu_item_children > a").append(
+        '<span class="expand"></span>'
+      );
+    }
+    categorySubMenuToggle();
   }
 };
 </script>

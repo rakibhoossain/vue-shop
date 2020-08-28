@@ -1,6 +1,6 @@
 <template>
   <section class="slider_section">
-    <div class="slider_area owl-carousel">
+    <div class="slider_area owl-carousel" id="main-slider">
       <div
         class="single_slider d-flex align-items-center"
         v-carousel
@@ -118,7 +118,7 @@ export default {
   mounted() {
     console.log(this.$el.textContent); // I'm text inside the component.
     /*---slider activation---*/
-    var $slider = $(".slider_area");
+    var $slider = $("#main-slider");
     if ($slider.length > 0) {
       $slider.owlCarousel({
         animateOut: "fadeOut",
