@@ -398,6 +398,7 @@
 
 <script>
 import HeaderArea from "./components/HeaderArea.vue";
+import $ from "jquery";
 import { WOW } from "wowjs";
 import "animate.css";
 export default {
@@ -407,6 +408,8 @@ export default {
   },
   mounted() {
     new WOW({ live: false }).init();
+    /*--- niceSelect---*/
+    $(".select_option").niceSelect();
   }
 };
 </script>
