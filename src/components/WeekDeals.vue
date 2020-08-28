@@ -178,6 +178,20 @@ export default {
   },
   mounted() {
     console.log(this.$el.textContent); // I'm text inside the component.
+    /*---countdown activation---*/
+
+    $("[data-countdown]").each(function() {
+      var $this = $(this),
+        finalDate = $(this).data("countdown");
+      $this.countdown(finalDate, function(event) {
+        $this.html(
+          event.strftime(
+            '<div class="countdown_area"><div class="single_countdown"><div class="countdown_number">%D</div><div class="countdown_title">day</div></div><div class="single_countdown"><div class="countdown_number">%H</div><div class="countdown_title">hour</div></div><div class="single_countdown"><div class="countdown_number">%M</div><div class="countdown_title">min</div></div><div class="single_countdown"><div class="countdown_number">%S</div><div class="countdown_title">sec</div></div></div>'
+          )
+        );
+      });
+    });
+
     var $porductColumn5 = $("#week-deals");
     if ($porductColumn5.length > 0) {
       $porductColumn5
