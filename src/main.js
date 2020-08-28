@@ -29,6 +29,9 @@ require("./assets/js/jquery.countdown.js");
 require("jquery-nice-select");
 import "jquery-nice-select/css/nice-select.css";
 
+require("./assets/js/jquery.ui.js");
+import "./assets/css/jquery-ui.min.css";
+
 createApp(App)
   .use(store)
   .use(router)
