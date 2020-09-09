@@ -2,36 +2,19 @@
   <aside class="sidebar_widget">
     <div class="widget_inner">
       <div class="widget_list widget_categories">
-        <h3>Women</h3>
+        <h3>Categories</h3>
         <ul>
-          <li class="widget_sub_categories sub_categories1">
-            <a href="javascript:void(0)">Shoes</a>
-            <ul class="widget_dropdown_categories dropdown_categories1">
-              <li><a href="#">Document</a></li>
-              <li><a href="#">Dropcap</a></li>
-              <li><a href="#">Dummy Image</a></li>
-              <li><a href="#">Dummy Text</a></li>
-              <li><a href="#">Fancy Text</a></li>
-            </ul>
-          </li>
-          <li class="widget_sub_categories sub_categories2">
-            <a href="javascript:void(0)">Bags</a>
-            <ul class="widget_dropdown_categories dropdown_categories2">
-              <li><a href="#">Flickr</a></li>
-              <li><a href="#">Flip Box</a></li>
-              <li><a href="#">Cocktail</a></li>
-              <li><a href="#">Frame</a></li>
-              <li><a href="#">Flickrq</a></li>
-            </ul>
-          </li>
-          <li class="widget_sub_categories sub_categories3">
-            <a href="javascript:void(0)">Clothing</a>
-            <ul class="widget_dropdown_categories dropdown_categories3">
-              <li><a href="#">Platform Beds</a></li>
-              <li><a href="#">Storage Beds</a></li>
-              <li><a href="#">Regular Beds</a></li>
-              <li><a href="#">Sleigh Beds</a></li>
-              <li><a href="#">Laundry</a></li>
+          <li
+            class="sub_categories"
+            v-for="category in categories"
+            :key="category.id"
+            :class="{ widget_sub_categories: category.children.length }"
+          >
+            <a href="javascript:void(0)">{{ category.name }}</a>
+            <ul class="widget_dropdown_categories dropdown_categories">
+              <li v-for="child_cat in category.children" :key="child_cat.id">
+                <a href="#">{{ child_cat.name }}</a>
+              </li>
             </ul>
           </li>
         </ul>
@@ -128,9 +111,22 @@
 
 <script>
 import $ from "jquery";
+import axios from "axios";
 export default {
   name: "ShopSidebar",
+  data() {
+    return {
+      brands: [],
+      categories: [],
+      variations: [],
+      errors: []
+    };
+  },
+  created() {
+    // this.getFilterData();
+  },
   mounted() {
+    this.getFilterData();
     /*---slider-range here---*/
     $("#slider-range").slider({
       range: true,
@@ -149,9 +145,12 @@ export default {
     );
 
     /*---widget sub categories---*/
-    $(".sub_categories1 > a").on("click", function() {
+    $(document).on("click", ".sub_categories > a", function() {
       $(this).toggleClass("active");
-      $(".dropdown_categories1").slideToggle("medium");
+      $(this)
+        .parent("li")
+        .find(".dropdown_categories")
+        .slideToggle("medium");
     });
 
     /*---widget sub categories---*/
@@ -165,6 +164,24 @@ export default {
       $(this).toggleClass("active");
       $(".dropdown_categories3").slideToggle("medium");
     });
+  },
+  methods: {
+    getFilterData() {
+      let _this = this;
+      axios
+        .get(`http://127.0.0.1:8000/api/shop-filter-data`)
+        .then(response => {
+          // JSON responses are automatically parsed.
+          _this.categories = response.data.categories;
+          _this.brands = response.data.brands;
+          _this.variations = response.data.variations;
+
+          console.log(_this.categories);
+        })
+        .catch(e => {
+          this.errors.push(e);
+        });
+    }
   }
 };
 </script>
