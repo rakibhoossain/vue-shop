@@ -27,7 +27,8 @@
           <input type="text" name="text" id="amount" />
         </form>
       </div>
-      <div class="widget_list widget_color">
+
+      <!-- <div class="widget_list widget_color">
         <h3>Select By Color</h3>
         <ul>
           <li>
@@ -46,48 +47,38 @@
             <a href="#">Pink <span>(4)</span></a>
           </li>
         </ul>
-      </div>
-      <div class="widget_list widget_color">
-        <h3>Select By SIze</h3>
+      </div> -->
+
+      <div
+        class="widget_list widget_color"
+        v-for="variation in variations"
+        :key="variation.id"
+      >
+        <h3>Select By {{ variation.name }}</h3>
         <ul>
-          <li>
-            <a href="#">S <span>(6)</span></a>
-          </li>
-          <li>
-            <a href="#"> M <span>(8)</span></a>
-          </li>
-          <li>
-            <a href="#">L <span>(10)</span></a>
-          </li>
-          <li>
-            <a href="#"> XL <span>(6)</span></a>
-          </li>
-          <li>
-            <a href="#">XLL <span>(4)</span></a>
+          <li
+            v-for="variation_value in variation.values"
+            :key="variation_value.id"
+          >
+            <a href="#"
+              >{{ variation_value.name }}
+              <span>({{ variation_value.products_count }})</span></a
+            >
           </li>
         </ul>
       </div>
+
       <div class="widget_list widget_manu">
         <h3>Manufacturer</h3>
         <ul>
-          <li>
-            <a href="#">Brake Parts <span>(6)</span></a>
-          </li>
-          <li>
-            <a href="#">Accessories <span>(10)</span></a>
-          </li>
-          <li>
-            <a href="#">Engine Parts <span>(4)</span></a>
-          </li>
-          <li>
-            <a href="#">hermes <span>(10)</span></a>
-          </li>
-          <li>
-            <a href="#">louis vuitton <span>(8)</span></a>
+          <li v-for="brand in brands" :key="brand.id">
+            <a href="#"
+              >{{ brand.name }} <span>({{ brand.products_count }})</span></a
+            >
           </li>
         </ul>
       </div>
-      <div class="widget_list tags_widget">
+      <!-- <div class="widget_list tags_widget">
         <h3>Product tags</h3>
         <div class="tag_cloud">
           <a href="#">Men</a>
@@ -104,7 +95,7 @@
         <div class="banner_thumb">
           <a href="#"><img src="assets/img/bg/banner17.jpg" alt=""/></a>
         </div>
-      </div>
+      </div> -->
     </div>
   </aside>
 </template>
