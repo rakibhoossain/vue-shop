@@ -72,7 +72,10 @@
               </form>
             </div>
             <div class="page_amount">
-              <p>Showing {{ from }}–{{ to }} of {{ total }} results</p>
+              <p>
+                Showing {{ pagination.from }}–{{ pagination.to }} of
+                {{ pagination.total }} results
+              </p>
             </div>
           </div>
           <!--shop toolbar end-->
@@ -214,17 +217,18 @@ export default {
     return {
       products: [],
       productsData: [],
-
-      first_page_url: null,
-      from: null,
-      last_page: null,
-      last_page_url: null,
-      next_page_url: null,
-      path: null,
-      per_page: null,
-      prev_page_url: null,
-      to: null,
-      total: null,
+      pagination: {
+        first_page_url: null,
+        from: null,
+        last_page: null,
+        last_page_url: null,
+        next_page_url: null,
+        path: null,
+        per_page: null,
+        prev_page_url: null,
+        to: null,
+        total: null
+      },
 
       errors: []
     };
@@ -283,16 +287,16 @@ export default {
           // JSON responses are automatically parsed.
           _this.productsData = response.data;
 
-          _this.first_page_url = response.data.first_page_url;
-          _this.from = response.data.from;
-          _this.last_page = response.data.last_page;
-          _this.last_page_url = response.data.last_page_url;
-          _this.next_page_url = response.data.next_page_url;
-          _this.path = response.data.path;
-          _this.per_page = response.data.per_page;
-          _this.prev_page_url = response.data.prev_page_url;
-          _this.to = response.data.to;
-          _this.total = response.data.total;
+          _this.pagination.first_page_url = response.data.first_page_url;
+          _this.pagination.from = response.data.from;
+          _this.pagination.last_page = response.data.last_page;
+          _this.pagination.last_page_url = response.data.last_page_url;
+          _this.pagination.next_page_url = response.data.next_page_url;
+          _this.pagination.path = response.data.path;
+          _this.pagination.per_page = response.data.per_page;
+          _this.pagination.prev_page_url = response.data.prev_page_url;
+          _this.pagination.to = response.data.to;
+          _this.pagination.total = response.data.total;
 
           _this.products = response.data.data;
           console.log(_this.productsData);
