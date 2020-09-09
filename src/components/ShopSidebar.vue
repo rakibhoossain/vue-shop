@@ -166,8 +166,6 @@ export default {
           _this.categories = response.data.categories;
           _this.brands = response.data.brands;
           _this.variations = response.data.variations;
-
-          console.log(_this.categories);
         })
         .catch(e => {
           this.errors.push(e);
