@@ -188,7 +188,8 @@
           </div>
 
           <div class="shop_toolbar t_bottom">
-            <div class="pagination">
+            <Pagination :paginations="pagination" v-if="loaded"></Pagination>
+            <!-- <div class="pagination">
               <ul>
                 <li class="current">1</li>
                 <li><a href="#">2</a></li>
@@ -196,7 +197,7 @@
                 <li class="next"><a href="#">next</a></li>
                 <li><a href="#">>></a></li>
               </ul>
-            </div>
+            </div> -->
           </div>
           <!--shop toolbar end-->
           <!--shop wrapper end-->
@@ -209,6 +210,7 @@
 
 <script>
 import ShopSidebar from "@/components/ShopSidebar.vue";
+import Pagination from "@/components/Pagination.vue";
 import $ from "jquery";
 import axios from "axios";
 export default {
@@ -218,6 +220,7 @@ export default {
       products: [],
       productsData: [],
       pagination: {
+        current_page: null,
         first_page_url: null,
         from: null,
         last_page: null,
@@ -229,12 +232,13 @@ export default {
         to: null,
         total: null
       },
-
+      loaded: false,
       errors: []
     };
   },
   components: {
-    ShopSidebar
+    ShopSidebar,
+    Pagination
   },
   created() {
     this.getProductsData();
@@ -287,6 +291,7 @@ export default {
           // JSON responses are automatically parsed.
           _this.productsData = response.data;
 
+          _this.pagination.current_page = response.data.current_page;
           _this.pagination.first_page_url = response.data.first_page_url;
           _this.pagination.from = response.data.from;
           _this.pagination.last_page = response.data.last_page;
@@ -299,7 +304,7 @@ export default {
           _this.pagination.total = response.data.total;
 
           _this.products = response.data.data;
-          console.log(_this.productsData);
+          _this.loaded = true;
         })
         .catch(e => {
           this.errors.push(e);
