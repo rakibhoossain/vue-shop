@@ -188,7 +188,11 @@
           </div>
 
           <div class="shop_toolbar t_bottom">
-            <Pagination :paginations="pagination" v-if="loaded"></Pagination>
+            <Pagination
+              :paginations="pagination"
+              v-if="loaded"
+              @change-url="getProductsData"
+            ></Pagination>
             <!-- <div class="pagination">
               <ul>
                 <li class="current">1</li>
@@ -283,13 +287,17 @@ export default {
     });
   },
   methods: {
-    getProductsData() {
+    getProductsData(page) {
+      if (typeof page === "undefined") {
+        page = 1;
+      }
       let _this = this;
       axios
-        .get(`http://127.0.0.1:8000/api/shop`)
+        .get(`http://127.0.0.1:8000/api/shop?page=` + page)
         .then(response => {
           // JSON responses are automatically parsed.
           _this.productsData = response.data;
+          _this.loaded = false;
 
           _this.pagination.current_page = response.data.current_page;
           _this.pagination.first_page_url = response.data.first_page_url;
