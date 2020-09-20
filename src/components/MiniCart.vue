@@ -71,7 +71,7 @@ export default {
       for (let item of this.$store.state.cart) {
         total += item.totalPrice;
       }
-      return this.cartCount ? total.toFixed(2) : 0;
+      return total;
     }
   }
 };
