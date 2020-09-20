@@ -7,6 +7,10 @@ export default createStore({
     cart: cart ? JSON.parse(cart) : [],
     cartCount: cartCount ? parseInt(cartCount) : 0
   },
+  getters: {
+    cart: state => state.cart,
+    cartCount: state => state.cartCount
+  },
   mutations: {
     ADD_PRODUCT(state, item) {
       let found = state.cart.find(product => product.id == item.id);
