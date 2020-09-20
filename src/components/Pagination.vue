@@ -31,8 +31,8 @@
           v-else
           :href="pagination.path + '?page=' + page"
           @click.prevent="sendPageNumber(page)"
-          >{{ page }}</a
-        >
+          >{{ page }}
+        </a>
       </li>
 
       <li v-if="pagination.last_page > pagination.current_page">
@@ -62,16 +62,12 @@ export default {
       pagination: { ...this.paginations }
     };
   },
-  updated() {
-    this.pagination = { ...this.paginations };
-  },
   watch: {
     paginations() {
       this.pagination = { ...this.paginations };
+      console.log(this.pagination);
+      console.log(this.paginations);
     }
-  },
-  created() {
-    console.log(this.pagination.first_page_url, this.pagination);
   },
   methods: {
     sendPageNumber(page) {

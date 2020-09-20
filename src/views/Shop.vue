@@ -193,16 +193,8 @@
               v-if="loaded"
               @change-url="getProductsData"
             ></Pagination>
-            <!-- <div class="pagination">
-              <ul>
-                <li class="current">1</li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li class="next"><a href="#">next</a></li>
-                <li><a href="#">>></a></li>
-              </ul>
-            </div> -->
           </div>
+
           <!--shop toolbar end-->
           <!--shop wrapper end-->
         </div>
@@ -223,19 +215,7 @@ export default {
     return {
       products: [],
       productsData: [],
-      pagination: {
-        current_page: null,
-        first_page_url: null,
-        from: null,
-        last_page: null,
-        last_page_url: null,
-        next_page_url: null,
-        path: null,
-        per_page: null,
-        prev_page_url: null,
-        to: null,
-        total: null
-      },
+      pagination: {},
       loaded: false,
       errors: []
     };
@@ -299,17 +279,21 @@ export default {
           _this.productsData = response.data;
           _this.loaded = false;
 
-          _this.pagination.current_page = response.data.current_page;
-          _this.pagination.first_page_url = response.data.first_page_url;
-          _this.pagination.from = response.data.from;
-          _this.pagination.last_page = response.data.last_page;
-          _this.pagination.last_page_url = response.data.last_page_url;
-          _this.pagination.next_page_url = response.data.next_page_url;
-          _this.pagination.path = response.data.path;
-          _this.pagination.per_page = response.data.per_page;
-          _this.pagination.prev_page_url = response.data.prev_page_url;
-          _this.pagination.to = response.data.to;
-          _this.pagination.total = response.data.total;
+          var paginationObject = {
+            current_page: response.data.current_page,
+            first_page_url: response.data.first_page_url,
+            from: response.data.from,
+            last_page: response.data.last_page,
+            last_page_url: response.data.last_page_url,
+            next_page_url: response.data.next_page_url,
+            path: response.data.path,
+            per_page: response.data.per_page,
+            prev_page_url: response.data.prev_page_url,
+            to: response.data.to,
+            total: response.data.total
+          };
+
+          _this.pagination = { ...paginationObject };
 
           _this.products = response.data.data;
           _this.loaded = true;
