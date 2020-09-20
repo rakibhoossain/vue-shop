@@ -100,7 +100,10 @@
                   <div class="action_links">
                     <ul>
                       <li class="add_to_cart">
-                        <a href="cart.html" title="Add to cart"
+                        <a
+                          href="#"
+                          @click.prevent="addToCart(product)"
+                          title="Add to cart"
                           ><span class="lnr lnr-cart"></span
                         ></a>
                       </li>
@@ -301,6 +304,9 @@ export default {
         .catch(e => {
           this.errors.push(e);
         });
+    },
+    addToCart(product) {
+      this.$store.dispatch("addToCart", product);
     }
   }
 };
