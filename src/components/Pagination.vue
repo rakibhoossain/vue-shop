@@ -10,13 +10,13 @@
         &lsaquo;
       </li>
       <li v-else>
-        <a
-          class="page-link"
+        <span
+          class="link-item"
           :href="pagination.prev_page_url"
           @click.prevent="sendPageNumber(pagination.current_page - 1)"
           rel="prev"
           aria-label="Prev Page"
-          >&lsaquo;</a
+          >&lsaquo;</span
         >
       </li>
 
@@ -27,21 +27,21 @@
         :key="page"
       >
         <span v-if="pagination.current_page == page">{{ page }}</span>
-        <a
+        <span
           v-else
           :href="pagination.path + '?page=' + page"
           @click.prevent="sendPageNumber(page)"
           >{{ page }}
-        </a>
+        </span>
       </li>
 
       <li v-if="pagination.last_page > pagination.current_page">
-        <a
+        <span
           :href="pagination.next_page_url"
           rel="next"
           aria-label="Next Page"
           @click.prevent="sendPageNumber(pagination.current_page + 1)"
-          >&rsaquo;</a
+          >&rsaquo;</span
         >
       </li>
       <li class="disabled" aria-disabled="true" aria-label="Next Page" v-else>
@@ -76,3 +76,9 @@ export default {
   }
 };
 </script>
+<style scoped>
+span {
+  cursor: pointer;
+  display: block;
+}
+</style>
